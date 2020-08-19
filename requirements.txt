@@ -1,0 +1,8 @@
+certifi
+decorator
+gunicorn
+itsdangerous
+MarkupSafe
+pycparser
+python-telegram-bot
+six
