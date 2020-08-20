@@ -16,9 +16,9 @@ PORT = int(os.environ.get('PORT', '8443'))
 
 
 def start(update, context):
-    keyboard = [[InlineKeyboardButton("Option 1", callback_data='1'),
-                 InlineKeyboardButton("Option 2", callback_data='2')],
-                [InlineKeyboardButton("Option 3", callback_data='3')]]
+    keyboard = [[InlineKeyboardButton("Start", callback_data='Start'),
+                 InlineKeyboardButton("Help", callback_data='help')],
+                [InlineKeyboardButton("About", callback_data='Developed by @TympazEngineer')]]
 
     reply_markup = InlineKeyboardMarkup(keyboard)
 
