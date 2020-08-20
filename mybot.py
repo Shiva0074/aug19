@@ -60,7 +60,8 @@ def main():
                           port=PORT,
                           url_path=TOKEN)
     
-    updater.bot.set_webhook("https://{}/{}/".format(APP_NAME,TOKEN))
+    #updater.bot.set_webhook("https://{}/{}/".format(APP_NAME,TOKEN))
+    updater.bot.set_webhook(APP_NAME + TOKEN)
 
     updater.idle()
 
