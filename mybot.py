@@ -9,7 +9,7 @@ logging.basicConfig(format='%(asctime)s - %(name)s - %(levelname)s - %(message)s
 
 logger = logging.getLogger(__name__)
 
-PORT = int(os.environ.get('PORT')
+PORT = int(os.environ.get('PORT'))
 # Define a few command handlers. These usually take the two arguments update and
 # context. Error handlers also receive the raised TelegramError object in error.
 
@@ -60,7 +60,7 @@ def main():
                           port=PORT,
                           url_path=TOKEN)
     
-    updater.bot.set_webhook(APP_NAME + TOKEN)
+    updater.bot.set_webhook("https://{}/{}/".format(APP_NAME,TOKEN))
 
     updater.idle()
 
