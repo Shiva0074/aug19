@@ -1,6 +1,7 @@
 import logging
 import os
 
+from telegram import InlineKeyboardButton, InlineKeyboardMarkup
 from telegram.ext import Updater, CommandHandler, MessageHandler, Filters
 
 # Enable logging
@@ -15,13 +16,24 @@ PORT = int(os.environ.get('PORT', '8443'))
 
 
 def start(update, context):
-    """Send a message when the command /start is issued."""
-    update.message.reply_text('Hi!')
+    keyboard = [[InlineKeyboardButton("Option 1", callback_data='1'),
+                 InlineKeyboardButton("Option 2", callback_data='2')],
+                [InlineKeyboardButton("Option 3", callback_data='3')]]
 
+    reply_markup = InlineKeyboardMarkup(keyboard)
+
+    update.message.reply_text('Please choose:', reply_markup=reply_markup)
+#Button
+def button(update, context):
+    query = update.callback_query
+    # CallbackQueries need to be answered, even if no notification to the user is needed
+    # Some clients may have trouble otherwise. See https://core.telegram.org/bots/api#callbackquery
+    query.answer()
+    query.edit_message_text(text="Selected option: {}".format(query.data)) 
 
 def help(update, context):
     """Send a message when the command /help is issued."""
-    update.message.reply_text('Help!')
+    update.message.reply_text('Use /start to start this bot.')
 
 
 def echo(update, context):
@@ -47,6 +59,8 @@ def main():
 
     # Handling commands - answer in Telegram
     dp.add_handler(CommandHandler("start", start))
+    # Keyboard Button
+    dp.add_handler(CallbackQueryHandler(button))
     dp.add_handler(CommandHandler("help", help))
 
     # If not Command i.e message - echo the message on Telegram
